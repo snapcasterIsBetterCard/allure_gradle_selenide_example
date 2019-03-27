@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.qameta.allure'
+
+group 'gradle_allure_selenide'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile "org.slf4j:slf4j-api:1.6.1"
+    compile "org.slf4j:slf4j-simple:1.6.1"
+    compile group: 'org.aspectj', name: 'aspectjrt', version: '1.9.2'
+    compile group: 'io.qameta.allure', name: 'allure-selenide', version: '2.0-BETA22'
+    compile group: 'com.codeborne', name: 'selenide', version: '5.2.2'
+    compile("junit:junit:4.13-beta-2")
+}
+
+allure {
+    autoconfigure = true
+    version = '2.6.0'
+
+    useJUnit4 {
+        version = '2.6.0'
+    }
+}
+
+test {
+    ignoreFailures = true
+    useJUnit()
+}
